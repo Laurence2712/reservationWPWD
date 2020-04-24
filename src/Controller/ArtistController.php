@@ -29,15 +29,15 @@ class ArtistController extends AbstractController
      * 
      */
 
-    public function show($id){
+    public function show(Artist $artist){
 
         $titre = 'Fiche artiste';
-        $repository = $this->getDoctrine()->getRepository(Artist::class);
-        $artists = $repository->find($id);
+        /*$repository = $this->getDoctrine()->getRepository(Artist::class);
+        $artists = $repository->find($id);*/
 
         return $this->render('artist/show.html.twig', [
             'titre' => $titre,
-            'artists' => $artists,
+            'artist' => $artist,
         ]);
 
     }
