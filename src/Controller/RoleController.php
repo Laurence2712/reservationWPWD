@@ -23,7 +23,9 @@ class RoleController extends AbstractController
             'roles' => $roles,
         ]);
     }
-
+    /**
+     * @Route("/role/{id}", name="role_show")
+     */
     public function show(Role $role){
 
         $titre = 'Fiche rôle';

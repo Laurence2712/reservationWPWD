@@ -23,7 +23,9 @@ class TypeController extends AbstractController
             'types' => $types,
         ]);
     }
-
+    /**
+     * @Route("/type/{id}", name="type_show")
+     */
     public function show(Type $type){
 
         $titre = 'Fiche type';
