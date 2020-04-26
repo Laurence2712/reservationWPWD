@@ -16,7 +16,7 @@ class LocationFixtures extends Fixture implements DependentFixtureInterface
         $locations = [
             [
                 'slug' => null,
-                'designation' => 'Espace Delvaux / La vénerie',
+                'designation' => 'Espace Delvaux / La Vénerie',
                 'address' => '3 rue Gratès',
                 'locality' => 'Watermael-Boitsfort',
                 'website' => 'https://www.lavenerie.be',
@@ -62,6 +62,8 @@ class LocationFixtures extends Fixture implements DependentFixtureInterface
             $location->setPhone($data['phone']);
 
             $manager->persist($location);
+
+            $this->addReference($location->getSlug(), $location);
         }
 
         

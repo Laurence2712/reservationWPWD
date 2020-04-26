@@ -3,7 +3,7 @@
 {% block title %}Locality{% endblock %}
 
 {% block body %}
-    <h1>Locality</h1>
+    <h1>{{ locality.postalCode }} {{ locality.locality }}</h1>
 
     <table class="table">
         <tbody>
@@ -19,6 +19,11 @@
                 <th>Locality</th>
                 <td>{{ locality.locality }}</td>
             </tr>
+            <ul>
+            {% for location in locality.locations %}
+                <li>{{ location.designation }}</li>
+            {% endfor %}
+            </ul>
         </tbody>
     </table>
 
