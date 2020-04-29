@@ -7,7 +7,7 @@
     <h1>{{ location.designation }}</h1>
     <address>
         <p>{{ location.address }}</p>
-        <p>{{ location.locality.postalCode }} {{ location.locality }}</p>
+        <p>{{ location.locality.postalCode }} {{ location.locality.locality }}</p>
 
         {% if location.website %}
         <p><a href="{{ location.website }}" target="_blank"> {{ location.website }}</a></p>
@@ -28,4 +28,5 @@
     <li>{{ show.title }}</li>
     {% endfor %}
     </ul>
+</article>
 {% endblock %}
