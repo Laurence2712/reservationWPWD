@@ -30,7 +30,7 @@ class Artist
     private $lastname;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Type", inversedBy="artists")
+     * @ORM\OneToMany(targetEntity="App\Entity\ArtistType", mappedBy="artist", orphanRemoval=true)
      */
     private $types;
 
@@ -69,7 +69,7 @@ class Artist
     }
 
     /**
-     * @return Collection|Type[]
+     * @return Collection|ArtistType[]
      */
     public function getTypes(): Collection
     {
@@ -80,15 +80,20 @@ class Artist
     {
         if (!$this->types->contains($type)) {
             $this->types[] = $type;
+            $type->setArtist($this);
         }
 
         return $this;
     }
 
-    public function removeType(Type $type): self
+    public function removeType(ArtistType $type): self
     {
         if ($this->types->contains($type)) {
             $this->types->removeElement($type);
+            if($type->getArtist() === $this){
+                $type->setArtist(null);
+
+            }
         }
 
         return $this;
