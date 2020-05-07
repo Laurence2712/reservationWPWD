@@ -12,8 +12,8 @@
     <h1>{{ artist.firstname }} {{ artist.lastname}}</h1>
     <h2>Liste des types</h2>
     <ul>
-    {% for type in artist.types %}
-    <li>{{ type.type }}</li>
+    {% for artistType in artist.types %}
+    <li>{{ artistType.type.type }}</li>
     {% endfor %}
     </ul>
 
