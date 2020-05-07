@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArtistRepository")
- * @ORM\Table(name="artists")
+ * @ORM\Table(name="artists");
  */
 class Artist
 {
@@ -54,9 +54,5 @@ class Artist
         $this->lastname = $lastname;
 
         return $this;
-    }
-
-    public function __toString(){
-        return $this->firstname." " .$this->lastname;
     }
 }

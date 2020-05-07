@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{titre}}{% endblock %}
+{% block title %}Liste des artistes!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,23 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ titre }}! ✅</h1>
+    <h1>Liste des {{ resource }}</h1>
 
-    <ul>
+   <table>
+    <thead>
+        <tr>
+             <th>Firstname</th>
+             <th>Lastname</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for artist in artists %}
-        <li>{{ artist }}</li>
+    <tr>
+    <td>{{ artist.firstname }}</td>
+    <td>{{ artist.lastname }}</td>
+    </tr>
     {% endfor %}
-    </ul>
+    </tbody>
+   </table>
 </div>
 {% endblock %}

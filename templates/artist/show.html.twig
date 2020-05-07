@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{titre}}{% endblock %}
+{% block title %}Fiche d'un artiste!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ titre }}! ✅</h1>
-
-    
-
-        <p>{{ artist }}</p>
-
+    <h1>{{ artist.firstname }} {{ artist.lastname}}</h1>
 
 </div>
 {% endblock %}
