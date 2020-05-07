@@ -15,7 +15,7 @@ class LocationFixtures extends Fixture implements DependentFixtureInterface
         $locations = [
             [
                 'slug' => null,
-                'designation' => 'Espace Delvaux / La vénerie',
+                'designation' => 'Espace Delvaux / La Vénerie',
                 'address' => '3 rue Gratès',
                 'locality' => 'Watermael-Boitsfort',
                 'website' => 'https://www.lavenerie.be',
