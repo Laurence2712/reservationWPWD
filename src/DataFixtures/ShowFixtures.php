@@ -42,7 +42,7 @@ class ShowFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'slug' => null,
-                'title' => 'Ceci n\'est pas un chanteur belge',
+                'title' => 'Ceci belge',
                 'description' => "Non peut-être",
                 'poster_url' => 'claudebelgesaison220.jpg',
                 'location_slug' => 'la-samaritaine',
@@ -67,6 +67,8 @@ class ShowFixtures extends Fixture implements DependentFixtureInterface
 
             $show->setBookable($record['bookable']);
             $show->setPrice($record['price']);
+
+            $this->addReference($show->getSlug(), $show);
 
             $manager->persist($show);
         }
