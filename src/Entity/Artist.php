@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArtistRepository")
- * @ORM\Table(name="artists");
+ * @ORM\Table(name="artists")
  */
 class Artist
 {
@@ -32,11 +32,11 @@ class Artist
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ArtistType", mappedBy="artist", orphanRemoval=true)
      */
-    private $types;
+    private $artistTypes;
 
     public function __construct()
     {
-        $this->types = new ArrayCollection();
+        $this->artistTypes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,32 +67,36 @@ class Artist
 
         return $this;
     }
+    
+    public function __toString() {
+        return $this->firstname." ".$this->lastname;
+    }
 
     /**
      * @return Collection|ArtistType[]
      */
-    public function getTypes(): Collection
+    public function getArtistTypes(): Collection
     {
-        return $this->types;
+        return $this->artistTypes;
     }
 
-    public function addType(ArtistType $type): self
+    public function addArtistType(ArtistType $artistType): self
     {
-        if (!$this->types->contains($type)) {
-            $this->types[] = $type;
-            $type->setArtist($this);
+        if (!$this->artistTypes->contains($artistType)) {
+            $this->artistTypes[] = $artistType;
+            $artistType->setArtist($this);
         }
 
         return $this;
     }
 
-    public function removeType(ArtistType $type): self
+    public function removeArtistType(ArtistType $artistType): self
     {
-        if ($this->types->contains($type)) {
-            $this->types->removeElement($type);
-            if($type->getArtist() === $this){
-                $type->setArtist(null);
-
+        if ($this->artistTypes->contains($artistType)) {
+            $this->artistTypes->removeElement($artistType);
+            // set the owning side to null (unless already changed)
+            if ($artistType->getArtist() === $this) {
+                $artistType->setArtist(null);
             }
         }
 

@@ -5,13 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArtistTypeRepository")
- * @ORM\Table(name="artist_type", uniqueConstraints={@UniqueConstraint(name="artist_type_idx", columns={"artist_id", "type_id"})})
- * @UniqueEntity(fields={"artist", "type"},message="This artist is already defined for this type of job in the database.")
+ * @UniqueEntity(
+ *      fields={"artist","type"},
+ *      message="This artist is already defined for this type of job in the database."
+ * )
  */
 class ArtistType
 {
@@ -23,19 +24,19 @@ class ArtistType
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Artist", inversedBy="types")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Artist", inversedBy="artistTypes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $artist;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="artists")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="artistTypes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Show", mappedBy="artistTypes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Show", mappedBy="artistType")
      */
     private $shows;
 
