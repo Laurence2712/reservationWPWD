@@ -47,22 +47,19 @@ class LocationFixtures extends Fixture implements DependentFixtureInterface
             ],
         ];
         
-        foreach($locations as $data) {
+        foreach ($locations as $record) {
             $slugify = new Slugify();
-            $location = new Location();  
-            $location_slug = $slugify->slugify($data['designation']);
             
-            $location->setSlug($location_slug);
-            $location->setDesignation($data['designation']);
-            $location->setAddress($data['address']);
-            $location->setLocality($this->getReference($data['locality']));
-            $location->setWebsite($data['website']);
-            $location->setPhone($data['phone']);
-            
+            $location = new Location();
+            $location->setSlug($slugify->slugify($record['designation']));
+            $location->setDesignation($record['designation']);
+            $location->setAddress($record['address']);
+            $location->setLocality($this->getReference($record['locality']));
+            $location->setWebsite($record['website']);
+            $location->setPhone($record['phone']);
             $manager->persist($location);
-
-            $this->addReference($location->getSlug(), $location);
             
+            $this->addReference($location->getSlug(), $location);
         }
 
         $manager->flush();

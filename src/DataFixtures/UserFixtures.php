@@ -54,12 +54,9 @@ class UserFixtures extends Fixture
            
             $this->addReference($record['login'], $user);
             
-            $manager->persist($user);
-
-            
+            $manager->persist($user);          
             
         }
-
 
         $manager->flush();
     }

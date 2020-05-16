@@ -62,22 +62,21 @@ class ArtistTypeShowFixtures extends Fixture implements DependentFixtureInterfac
             
         ];
 
-        foreach($artistTypeShows as $record){
-            $show = $this->getReference($record['show_slug']);
+        foreach($ats as $data) {
+            $at = $this->getReference($data['artist_firstname']
+                    .'-'.$data['artist_lastname']
+                    .'-'.$data['type']);
+            $show = $this->getReference($data['show_slug']);
 
-            $artistType = $this->getReference(
-                $record['artist_firstname']
-                .'-'.$record['artist_lastname']
-                .'-'.$record['type']
-            );
+            $show->addArtistType($at);
 
-            $show->addArtistType($artistType);
             $manager->persist($show);
         }
-
+        
         $manager->flush();
     }
-    public function getDependencies(){
+    
+    public function getDependencies() {
         return [
             ArtistTypeFixtures::class,
             ShowFixtures::class,

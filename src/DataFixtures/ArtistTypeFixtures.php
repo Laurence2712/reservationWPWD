@@ -59,30 +59,21 @@ class ArtistTypeFixtures extends Fixture implements DependentFixtureInterface
             ],
         ];
 
-        foreach($artistTypes as $record){
-            $artist = $this->getReference(
-                $record['artist_firstname'].'-'.$record['artist_lastname']
-            );
-
+        foreach($artistTypes as $record) {
+            $artist = $this->getReference($record['artist_firstname'].'-'.$record['artist_lastname']);
             $type = $this->getReference($record['type']);
-
-            //$artist->addType($type);
-
             
-
-            $at = new ArtistType();
-            $at->setArtist($artist);
-            $at->setType($type);
-    
-            $this->addReference(
-                $record['artist_firstname']
-                .'-'.$record['artist_lastname']
-                .'-'.$record['type'], $at);
-
-
-            $manager->persist($at);
+            $artistType = new ArtistType();
+            $artistType->setArtist($artist);
+            $artistType->setType($type);
+            
+            $this->addReference($record['artist_firstname']
+                    .'-'.$record['artist_lastname']
+                    .'-'.$record['type'],$artistType);
+            
+            $manager->persist($artistType); 
         }
-
+        
         $manager->flush();
     }
 
