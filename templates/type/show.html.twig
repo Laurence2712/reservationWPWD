@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fiche d'un type{% endblock %}
+{% block title %}{{ titre }}{% endblock %}
 
 {% block body %}
 <div class="example-wrapper">
-    <h1>{{ type.type }}</h1>
+    <h1>{{ type.type|capitalize }}</h1>
+    
     <h2>Liste des artistes</h2>
     <ul>
-    {% for artistType in type.artists %}
-    <li>{{ artistType.artist.firstname }} {{ artistType.artist.lastname }}</li>
+    {% for artistType in type.artistTypes %}
+        <li>{{ artistType.artist }}</li>
     {% endfor %}
     </ul>
 </div>
