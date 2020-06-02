@@ -11,6 +11,11 @@ use Symfony\Component\Form\Forms;
 use App\Entity\User;
 use App\Entity\Role;
 use App\Form\UserType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use App\Security\LoginFormAuthenticator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
@@ -38,22 +43,69 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-    
+
     /**
      * @Route("/signin", name="app_signin")
      */
-    public function register(){
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, ValidatorInterface $validator): Response{
+
+
+      //Si l'utilisateur est connecté, on le redirige
+      $user = $this->getUser();
+      if($user){
+        return $this->redirectRoute('show');
+      }
+
+
         $title = 'Inscription';
         $user = new User();
-        $roleAdmin = new Role();
-        $roleAdmin->setRole('admin');
-        $user->addRole($roleAdmin);
-        
+        $error = [];
+        //$roleAdmin = new Role();
+        //$roleAdmin->setRole('admin');
+        //$user->addRole($roleAdmin);
+
         $form = $this->createForm(UserType::class,$user);
-        
+        $form->remove('password');
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+          $user = $form->getData();
+          $user->setPassword($form->get('plainPassword')->getData());
+
+          $userRole = $form->get('user_role')->getData();
+          $user->addRole($userRole);
+
+          $errors = $validator->validate($user);
+
+          if(count($errors)==0) {
+              //Hashage du mot de passe
+              $user->setPassword(
+                  $passwordEncoder->encodePassword(
+                      $user,
+                      $form->get('plainPassword')->getData()
+                  )
+              );
+
+              $entityManager = $this->getDoctrine()->getManager();
+              $entityManager->persist($user);
+              $entityManager->flush();
+
+              // do anything else you need here, like send an email
+
+              return $guardHandler->authenticateUserAndHandleSuccess(
+                  $user,
+                  $request,
+                  $authenticator,
+                  'main' // firewall name in security.yaml
+              );
+          }
+        }
+
         return $this->render('security/signin.html.twig',[
             'title' => $title,
-            'formRegister' => $form->createView()
+            'formRegister' => $form->createView(),
+            'errors' => $errors,
         ]);
     }
 }
