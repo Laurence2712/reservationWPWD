@@ -64,7 +64,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="user", orphanRemoval=true)
      */
     private $reservations;
-    
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -162,7 +162,7 @@ class User implements UserInterface
         }
 
         $roles[] = 'ROLE_USER';
-        
+
         return array_unique($roles);
     }
 
@@ -214,7 +214,7 @@ class User implements UserInterface
 
         return $this;
     }
-    
+
     /**
      * A visual identifier that represents this user.
      *
@@ -224,7 +224,7 @@ class User implements UserInterface
     {
         return (string) $this->email;
     }
-    
+
     /**
      * @see UserInterface
      */
@@ -240,6 +240,9 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-    
+      }
+        public function __toString() {
+           return $this->firstname.' '.$this->lastname;
+       }
+
 }

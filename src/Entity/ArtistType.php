@@ -37,7 +37,7 @@ class ArtistType
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Show", mappedBy="artistType")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Show", mappedBy="artistTypes")
      */
     private $shows;
 

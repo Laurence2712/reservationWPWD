@@ -22,7 +22,7 @@ class Representation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Show", inversedBy="representations")
-     * @ORM\JoinColumn(nullable=false, name="show_id", referencedColumnName="id", 
+     * @ORM\JoinColumn(nullable=false, name="show_id", referencedColumnName="id",
      * onDelete="RESTRICT")
      */
     private $the_show;
@@ -34,7 +34,7 @@ class Representation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="representations")
-     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", 
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id",
      * onDelete="RESTRICT")
      */
     private $the_location;
@@ -119,5 +119,10 @@ class Representation
         }
 
         return $this;
+    }
+    public function __toString() {
+        return $this->the_show->getTitle() .' - '
+                . $this->schedule->format('d/m/Y') .' - '
+                .(!empty($this->the_location) ? $this->the_location->getDesignation():'');
     }
 }

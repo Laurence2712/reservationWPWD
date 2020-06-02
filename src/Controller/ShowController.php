@@ -29,9 +29,9 @@ class ShowController extends AbstractController
     /**
      * @Route("/show/{id}", name="show_show")
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-      $repository = $this->getDoctrine()->getRepository(Show::class);
+       $repository = $this->getDoctrine()->getRepository(Show::class);
        $show = $repository->find($id);
        $notification = "";
        $collaborateurs = [];
@@ -52,7 +52,7 @@ class ShowController extends AbstractController
           $reservation->setUser($this->getUser());
 
           //Redirection vers Reservation.pay
-          //$this->redirectToRoute('reservation_pay',['reservation'=>$reservation]);
+        
           return $this->render('reservation/pay.html.twig', [
            'reservation' => $reservation,
        ]);
