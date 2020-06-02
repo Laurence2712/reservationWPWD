@@ -30,7 +30,7 @@ class Locality
     private $locality;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="locality", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="locality")
      */
     private $locations;
 

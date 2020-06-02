@@ -21,12 +21,12 @@ class ReservationController extends AbstractController
     public function index(ReservationRepository $reservationRepository): Response
     {
         $reservations = $reservationRepository->findAll();
-        
+
         $groupedReservations = [];
         foreach($reservations as $res) {
             $groupedReservations[$res->getUser()->getId()][] = $res;
         }
-        
+
         return $this->render('reservation/index.html.twig', [
             'reservations' => $groupedReservations,
         ]);
@@ -98,4 +98,6 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('reservation_index');
     }
+
+  
 }

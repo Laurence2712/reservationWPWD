@@ -1,10 +1,25 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <h2>{{ title|upper }}</h2>
-    
-    {{ form(formRegister) }}
+  <h2>{{ title|upper }}</h2>
 
+  {{ form_start(formRegister) }}
+
+  {{ form_row(formRegister.firstname) }}
+  {{ form_row(formRegister.lastname) }}
+  {{ form_row(formRegister.login) }}
+  {{ form_row(formRegister.password) }}
+  {{ form_row(formRegister.email) }}
+  {{ form_row(formRegister.langue) }}
+  {{ form_row(formRegister.user_role) }}
+  {{ form_row(formRegister.agreeTerms) }}
+
+  {{ form_end(formRegister) }}
+
+  {% for error in errors %}
+      <p class="alert alert-danger">{{ error.message }}</p>
+  {% endfor %}
 {% endblock %}

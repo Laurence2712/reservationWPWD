@@ -3,10 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\Mapping\JoinColumn;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  * @ORM\Table(name="locations")
+ * 
  */
 class Location
 {

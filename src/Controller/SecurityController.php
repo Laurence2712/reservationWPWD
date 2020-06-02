@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Form\FormFactoryBuilder;
 use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\FormView;
 use App\Entity\User;
 use App\Entity\Role;
 use App\Form\UserType;
@@ -105,7 +106,7 @@ class SecurityController extends AbstractController
         return $this->render('security/signin.html.twig',[
             'title' => $title,
             'formRegister' => $form->createView(),
-            'errors' => $errors,
+
         ]);
     }
 }

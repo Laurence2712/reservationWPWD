@@ -28,15 +28,16 @@ class LocalityFixtures extends Fixture
                 'locality'=>'Watermael-Boitsfort',
             ],
         ];
-        
+
         foreach($localities as $data) {
             $locality = new Locality();
             $locality->setPostalCode($data['postal_code']);
             $locality->setLocality($data['locality']);
-            
-            $this->addReference($data['locality'],$locality);
-            
             $manager->persist($locality);
+
+            $this->addReference($data['locality'],$locality);
+
+
         }
 
         $manager->flush();
