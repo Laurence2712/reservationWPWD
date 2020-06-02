@@ -3,7 +3,18 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .tableau {margin-top: 100px;}
+     h1{ text-align:center; margin-bottom:100px;}
+    .new{ text-align:center; border:1px solid blue; max-width:220px; display:block; margin:auto;}
+    .new a{text-decoration:none;}
+
+</style>
+
+    <h1>Utilisateur</h1>
 
     <table class="table">
         <tbody>
@@ -16,15 +27,15 @@
                 <td>{{ user.login }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>Firstname</th>
+                <th>Prénom</th>
                 <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Nom</th>
                 <td>{{ user.lastname }}</td>
             </tr>
             <tr>

@@ -18,7 +18,9 @@ class User1Type extends AbstractType
             ->add('lastname')
             ->add('email')
             ->add('langue')
-            ->add('roles')
+
+            //L'utilisateur ne peut pas choisir le rôle qu'il a
+            //->add('roles')
         ;
     }
 

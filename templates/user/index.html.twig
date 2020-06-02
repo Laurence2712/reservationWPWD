@@ -3,19 +3,34 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
 
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .tableau {margin-top: 100px;}
+    .title{  color:#fff; text-align:center; margin-top: 60px; background: #005c96; border: 1px solid #005c96; border-radius: 50px; padding: 20px;  }
+     h1{ text-align:center; margin-bottom:100px;}
+    .table{ margin-bottom: 30px;}
+    .new{ text-align:center; border:1px solid blue; max-width:220px; display:block; margin:auto;}
+    .new a{text-decoration:none;}
+
+</style>
+
+<div class="example-wrapper">
+    <h1>Liste des utilisateurs</h1>
+</div>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="title">
                 <th>Id</th>
                 <th>Login</th>
-                <th>Password</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Mot de passe</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Email</th>
                 <th>Langue</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -41,5 +56,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <p class="new"><a href="{{ path('user_new') }}">Création d'un nouvel utilisateur</a></p>
 {% endblock %}
