@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Show;
+use App\Entity\Reservation;
+use App\Form\ReservationType;
 
 class ShowController extends AbstractController
 {
@@ -28,18 +31,38 @@ class ShowController extends AbstractController
      */
     public function show($id)
     {
-        $repository = $this->getDoctrine()->getRepository(Show::class);
-        $show = $repository->find($id);
+      $repository = $this->getDoctrine()->getRepository(Show::class);
+       $show = $repository->find($id);
+       $notification = "";
+       $collaborateurs = [];
 
-        $collabordateurs = [];
+       foreach($show->getArtistTypes() as $at) {
+           $collaborateurs[$at->getType()->getType()][] = $at->getArtist();
+       }
 
-        foreach($show->getArtistTypes() as $at) {
-            $collaborateurs[$at->getType()->getType()][] = $at->getArtist();
-        }
+       //Gestion de la réservation d'une représentation
+       $reservation = new Reservation();
 
-        return $this->render('show/show.html.twig', [
-            'show' => $show,
-            'collaborateurs' => $collaborateurs,
-        ]);
-    }
+       $form = $this->createForm(ReservationType::class,$reservation);
+
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid()) {
+          //Associer l'utilisateur en cours à la réservation
+          $reservation->setUser($this->getUser());
+
+          //Redirection vers Reservation.pay
+          //$this->redirectToRoute('reservation_pay',['reservation'=>$reservation]);
+          return $this->render('reservation/pay.html.twig', [
+           'reservation' => $reservation,
+       ]);
+       }
+
+       return $this->render('show/show.html.twig', [
+           'show' => $show,
+           'collaborateurs' => $collaborateurs,
+           'formReservation' => $form->createView(),
+           'notification' => $notification,
+       ]);
+   }
 }
