@@ -21,7 +21,7 @@ class TypeFixtures extends Fixture
             $type = new Type();
             $type->setType($record['type']);
 
-            $this->addReference($data['type'], $type);
+            $this->addReference($record['type'], $type);
 
             $manager->persist($type);
 

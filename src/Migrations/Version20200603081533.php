@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200602184335 extends AbstractMigration
+final class Version20200603081533 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -25,8 +25,6 @@ final class Version20200602184335 extends AbstractMigration
         $this->addSql('CREATE TABLE representation_user (id INT AUTO_INCREMENT NOT NULL, representation_id INT NOT NULL, user_id INT NOT NULL, places SMALLINT NOT NULL, INDEX IDX_979840A446CE82F4 (representation_id), INDEX IDX_979840A4A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE representation_user ADD CONSTRAINT FK_979840A446CE82F4 FOREIGN KEY (representation_id) REFERENCES representations (id)');
         $this->addSql('ALTER TABLE representation_user ADD CONSTRAINT FK_979840A4A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
-        $this->addSql('DROP INDEX artist_type_idx ON artist_type');
-        $this->addSql('ALTER TABLE users CHANGE langue langue VARCHAR(2) NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -35,7 +33,5 @@ final class Version20200602184335 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP TABLE representation_user');
-        $this->addSql('CREATE UNIQUE INDEX artist_type_idx ON artist_type (artist_id, type_id)');
-        $this->addSql('ALTER TABLE users CHANGE langue langue VARCHAR(60) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }

@@ -3,7 +3,22 @@
 {% block title %}Reservation index{% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+    .title{  color:#fff; text-align:center; margin-top: 60px; background: #005c96; border: 1px solid #005c96; border-radius: 50px; padding: 20px;  }
+     h1{ text-align:center; margin-bottom:100px;}
+     .new{ text-align:center; border:1px solid blue; max-width:220px; display:block; margin:auto;}
+     .new a{text-decoration:none;}
+
+
+
+</style>
+
+
+
+    <h1>Réservation</h1>
 
     <ul>
         {% for groups in reservations %}
@@ -23,5 +38,5 @@
         {% endfor %}
     </ul>
 
-    <a href="{{ path('reservation_new') }}">Create new</a>
+<p class="new"><a href="{{ path('reservation_new') }}">Nouvelle réservation</a></p>
 {% endblock %}

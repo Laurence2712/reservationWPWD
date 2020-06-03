@@ -12,21 +12,21 @@ class UserRoleFixtures extends Fixture implements DependentFixtureInterface
     {
         $userRoles = [
             [
-                'user_id' => 'bob',
-                'role_id' => 'admin',
-                
+                'user_login' => 'bob',
+                'role' => 'admin',
+
             ],
             [
-                'user_id' => 'fred',
-                'role_id' => 'membre',
-                
+                'user_login' => 'fred',
+                'role' => 'member',
+
             ],
             [
-                'user_id' => 'judith',
-                'role_id' => 'affiliate',
-                
+                'user_login' => 'judith',
+                'role' => 'affiliate',
+
             ],
-            
+
         ];
 
         foreach($userRoles as $record){

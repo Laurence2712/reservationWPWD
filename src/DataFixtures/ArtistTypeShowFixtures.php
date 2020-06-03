@@ -59,10 +59,10 @@ class ArtistTypeShowFixtures extends Fixture implements DependentFixtureInterfac
                 'type' => 'comédien',
                 'show_slug' => 'cible-mouvante',
             ],
-            
+
         ];
 
-        foreach($ats as $data) {
+        foreach($artistTypeShows as $data) {
             $at = $this->getReference($data['artist_firstname']
                     .'-'.$data['artist_lastname']
                     .'-'.$data['type']);
@@ -72,10 +72,10 @@ class ArtistTypeShowFixtures extends Fixture implements DependentFixtureInterfac
 
             $manager->persist($show);
         }
-        
+
         $manager->flush();
     }
-    
+
     public function getDependencies() {
         return [
             ArtistTypeFixtures::class,
