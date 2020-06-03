@@ -103,7 +103,7 @@ class ReservationController extends AbstractController
         * @Route("/pay", name="reservation_pay")
         */
        public function pay(Request $request): Response {
-           //Payer
+          /* //Payer
               dump($reservation);die;
            if(false) {
                //Persistance des données
@@ -116,6 +116,22 @@ class ReservationController extends AbstractController
            } else {
                $notification = "Votre paiement a été refusé!";
            }
+*/
+
+      \Stripe\Stripe::setApiKey("pk_test_cncyE5V72eMI7NLpfcRuJPQS005fgbIJ3s");
+      $token = $_POST['stripeToken'];
+      $charge = \Stripe\Charge::create([
+        'amount' => 999,
+        'currency' => 'eur',
+        'description' => 'Example charge',
+        'source' => $token,
+      ]);
+
+        return $this->render('reservation/pay.html.twig');
+
+
+
+
 
        }
 

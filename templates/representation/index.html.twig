@@ -1,4 +1,4 @@
-  
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des représentations{% endblock %}
@@ -16,4 +16,47 @@
         </li>
     {% endfor %}
     </ul>
+
+
+
+
+    <table class="table table-striped table-bordered" style="width:100% id="myTable>
+
+      <thead>
+
+      <tr>
+        <th>Représentations</th>
+        <th>lieu</th>
+        <th>Date et heure</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for representation in representations %}
+      <tr>
+        <td>{{ representation.theShow.title }}</td>
+          {% if representation.theLocation  %}
+        <td>{{ representation.theLocation.designation }}</td>
+        {% endif %}
+
+        <td><datetime>{{ representation.schedule|date('d-m-Y H:i') }}</datetime></td>
+
+
+      </tr>
+  {% endfor %}
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>Représentations</th>
+        <th>lieu</th>
+        <th>Date et heure</th>
+      </tr>
+
+      </tfoot>
+
+
+    </table>
+
+
+
+
 {% endblock %}
