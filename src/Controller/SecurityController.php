@@ -53,14 +53,14 @@ class SecurityController extends AbstractController
 
       //Si l'utilisateur est connecté, on le redirige
       $user = $this->getUser();
-      if($user){
+      /*if($user){
         return $this->redirectRoute('show');
       }
 
-
+*/
         $title = 'Inscription';
         $user = new User();
-        $error = [];
+        $errors = [];
         //$roleAdmin = new Role();
         //$roleAdmin->setRole('admin');
         //$user->addRole($roleAdmin);
@@ -106,6 +106,7 @@ class SecurityController extends AbstractController
         return $this->render('security/signin.html.twig',[
             'title' => $title,
             'formRegister' => $form->createView(),
+            'errors' => $errors,
 
         ]);
     }

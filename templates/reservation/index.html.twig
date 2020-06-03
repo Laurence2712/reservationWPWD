@@ -11,6 +11,7 @@
      h1{ text-align:center; margin-bottom:100px;}
      .new{ text-align:center; border:1px solid blue; max-width:220px; display:block; margin:auto;}
      .new a{text-decoration:none;}
+     .newPay{ margin-top: 20px;}
 
 
 
@@ -18,7 +19,7 @@
 
 
 
-    <h1>Réservation</h1>
+    <h1>Liste des réservations</h1>
 
     <ul>
         {% for groups in reservations %}
@@ -26,7 +27,7 @@
                 <ul>{{ groups.0.user.firstname }} {{ groups.0.user.lastname }}
                 {% for reservation in groups %}
                     <li>
-                        <span class="alert alert-primary">{{ reservation.representation.theShow.title }}</span> ({{ reservation.places }} places)
+                        <span>{{ reservation.representation.theShow.title }}</span> ({{ reservation.places }} places)
                         <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
                         <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
                     </li>
@@ -38,5 +39,6 @@
         {% endfor %}
     </ul>
 
-<p class="new"><a href="{{ path('reservation_new') }}">Nouvelle réservation</a></p>
+<p class="new alert alert-primary"><a href="{{ path('reservation_new') }}">Nouvelle réservation</a></p>
+<p class="new newPay alert alert-primary"><a href="{{ path('reservation_pay') }}">Payer</a></p>
 {% endblock %}
