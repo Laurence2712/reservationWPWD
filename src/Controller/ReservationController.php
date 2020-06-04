@@ -100,34 +100,21 @@ class ReservationController extends AbstractController
     }
 
         /**
-        * @Route("/pay", name="reservation_pay")
+        * @Route("/{id}/pay", name="reservation_pay")
         */
-       public function pay(Request $request): Response {
-          /* //Payer
-              dump($reservation);die;
-           if(false) {
-               //Persistance des données
-               $manager = $this->getdoctrine()->getManager();
-               $manager->persist($reservation);
-               $manager->flush();
+       public function pay(Request $request, Reservation $reservation): Response {
 
-               //Redirection ou pas
-               $notification = "Votre réservation a bien été enregistrée. Merci!";
-           } else {
-               $notification = "Votre paiement a été refusé!";
-           }
-*/
+        \Stripe\Stripe::setApiKey("sk_test_St6lOkrauDqNWgifiW89Ydu300twSrPkQn");
+       
+        \Stripe\PaymentIntent::create([
+            'amount' => 2000,
+            'currency' => 'eur',
+            'payment_method_types' => ['card'],
+        ]);
 
-      \Stripe\Stripe::setApiKey("pk_test_cncyE5V72eMI7NLpfcRuJPQS005fgbIJ3s");
-      $token = $_POST['stripeToken'];
-      $charge = \Stripe\Charge::create([
-        'amount' => 999,
-        'currency' => 'eur',
-        'description' => 'Example charge',
-        'source' => $token,
-      ]);
-
-        return $this->render('reservation/pay.html.twig');
+            return $this->render('reservation/pay.html.twig', [
+            'reservation' => $reservation,
+            ]);
 
 
 

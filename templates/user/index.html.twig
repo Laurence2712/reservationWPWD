@@ -20,17 +20,18 @@
 <div class="example-wrapper">
     <h1>Liste des utilisateurs</h1>
 </div>
+<div class="container">
     <table class="table">
         <thead>
             <tr class="title">
                 <th>Id</th>
                 <th>Login</th>
-                <th>Mot de passe</th>
+
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Langue</th>
-                <th>Actions</th>
+
             </tr>
         </thead>
         <tbody>
@@ -38,14 +39,14 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.login }}</td>
-                <td>{{ user.password }}</td>
+
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.langue }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+
                 </td>
             </tr>
         {% else %}
@@ -55,6 +56,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <p class="new alert alert-primary"><a href="{{ path('user_new') }}">Création d'un nouvel utilisateur</a></p>
 {% endblock %}

@@ -22,7 +22,9 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
-                
+                target: show
+
+
                 # where to redirect after logout
                 # target: app_any_route
             # activate different ways to authenticate

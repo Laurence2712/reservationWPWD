@@ -17,7 +17,10 @@
 
     <h1>Création d'un nouvel utilisateur</h1>
 
+<div class="container">
     {{ include('user/form.html.twig') }}
 
     <p class="new alert alert-primary"><a href="{{ path('user_index') }}">Retour à la liste</a></p>
+</div>
+
 {% endblock %}
