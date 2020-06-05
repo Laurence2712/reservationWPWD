@@ -1,0 +1,16 @@
+easy_admin: 
+    entities:
+      - App\Entity\Show
+      - App\Entity\Representation
+      - App\Entity\Reservation
+      - App\Entity\User
+    design:
+        menu:
+            - { entity: 'Show', css_class: 'menu--user' }
+            - { entity: 'Representation' }
+            - { entity: 'Reservation' }
+            - { entity: 'User' }
+            
+          
+
+   

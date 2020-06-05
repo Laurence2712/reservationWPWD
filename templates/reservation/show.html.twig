@@ -9,10 +9,14 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     .title{  color:#fff; text-align:center; margin-top: 60px; background: #005c96; border: 1px solid #005c96; border-radius: 50px; padding: 20px;  }
      h1{ text-align:center; margin-bottom:100px; margin-top:70px;}
+     .table{ max-width: 500px;}
+     .btn a {color:#fff; text-decoration: none;}
+     .container{max-width:600px;}
+
 </style>
 
     <h1>Votre réservation</h1>
-
+<div class="container">
     <table class="table">
         <tbody>
             <tr>
@@ -37,11 +41,13 @@
             </tr>
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('reservation_index') }}">Retour à la liste des réservations</a>
-
-    <p><a href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a></p>
-    <p class="new newPay alert alert-primary"><a href="{{ path('reservation_pay', {'id': reservation.id}) }}">Payer</a></p>
-
-    {{ include('reservation/_delete_form.html.twig') }}
+<div class="container btnReservation">
+<hr>
+    <button class="btn btn-primary"><a href="{{ path('reservation_index') }}">Retour à la liste des réservations</a></button>
+    <button class="btn btn-warning"><a href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a></button>
+    <button class="btn btn-success"><a href="{{ path('reservation_pay', {'id': reservation.id}) }}">Payer</a></button>
+    <span style="float:right">{{ include('reservation/_delete_form.html.twig') }}</span>
+</div>
 {% endblock %}

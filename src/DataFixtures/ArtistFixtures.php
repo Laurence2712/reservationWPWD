@@ -24,6 +24,7 @@ class ArtistFixtures extends Fixture
             ['firstname'=>'Laurence', 'lastname'=>'Warin'],
             ['firstname'=>'Pierre', 'lastname'=>'Wayburn'],
             ['firstname'=>'Gwendoline', 'lastname'=>'Gauthier'],
+ 
         ];
 
         foreach($artists as $record){

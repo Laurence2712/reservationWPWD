@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping\JoinColumn;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowRepository")
  * @ORM\Table(name="`shows`")
@@ -24,6 +24,7 @@ class Show
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Assert\Regex(pattern="/^[a-z0-9\-]+$/")
      */
     private $slug;
 

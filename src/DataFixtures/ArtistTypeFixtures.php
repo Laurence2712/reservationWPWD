@@ -57,6 +57,7 @@ class ArtistTypeFixtures extends Fixture implements DependentFixtureInterface
                 'artist_lastname' => 'Varasso',
                 'type' => 'comédien',
             ],
+            
         ];
 
         foreach($artistTypes as $record) {

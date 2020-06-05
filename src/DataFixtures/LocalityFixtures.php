@@ -27,6 +27,7 @@ class LocalityFixtures extends Fixture
                 'postal_code'=>'1170',
                 'locality'=>'Watermael-Boitsfort',
             ],
+     
         ];
 
         foreach($localities as $data) {

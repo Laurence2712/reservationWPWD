@@ -8,17 +8,23 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     .title{  color:#fff; text-align:center; margin-top: 60px; background: #005c96; border: 1px solid #005c96; border-radius: 50px; padding: 20px;  }
-     h1{ text-align:center; margin-bottom:100px; margin-top:70px;}
+     h1{ text-align:center; text-decoration: underline;}
+     .btnvoir{color:#fff;}
+     .btnvoir:hover{color:#fff; text-decoration:none;}
+     .titleTab{color:#17a2b8;}
+
 </style>
 
 <h1>Liste des {{ resource }}</h1>
-
+<div class="container">
 <table class="table table-striped table-bordered" style="width:100%"  id="myTable">
   <thead>
     <tr>
-      <th>Représentations</th>
-      <th>Prix</th>
-      <th>Nombre de représentations</th>
+      <th class="titleTab">Titre</th>
+      <th class="titleTab">Prix</th>
+      <th class="titleTab">Nombre de représentations</th>
+      <th class="titleTab">Réservable</th>
+      <th class="titleTab">Plus</th>
     </tr>
   </thead>
   <tbody>
@@ -37,17 +43,26 @@
         {% else %}
       <em>aucune représentation</em>
         {% endif %}</td>
-      <td><a href="{{ path('show_show', {'id': show.id}) }}">Voir</a></td>
+
+        <td>{% if show.bookable  == 1 %}
+        <span>Oui</span>
+        {% elseif show.bookable == 0 %}
+        <span>Non</span>
+        {% endif %}</td>
+
+      <td><button class="btn btn-info"><a class="btnvoir" href="{{ path('show_show', {'id': show.id}) }}">Voir</a></button></td>
     </tr>
     {% endfor %}
   </tbody>
   <tfoot>
    <tr>
-      <th>Représentations</th>
-      <th>Prix</th>
-      <th>Nombre de représentations</th>
+      <th class="titleTab">Titre</th>
+      <th class="titleTab">Prix</th>
+      <th class="titleTab">Nombre de représentations</th>
+      <th class="titleTab">Réservable</th>
+      <th class="titleTab">Plus</th>
     </tr>
   </tfoot>
 </table>
-
+</div>
 {% endblock %}

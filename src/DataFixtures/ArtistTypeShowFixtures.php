@@ -59,6 +59,7 @@ class ArtistTypeShowFixtures extends Fixture implements DependentFixtureInterfac
                 'type' => 'comédien',
                 'show_slug' => 'cible-mouvante',
             ],
+        
 
         ];
 

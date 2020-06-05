@@ -45,6 +45,7 @@ class LocationFixtures extends Fixture implements DependentFixtureInterface
                 'website' => 'http://www.espacemagh.be',
                 'phone' => null,
             ],
+          
         ];
         
         foreach ($locations as $record) {
