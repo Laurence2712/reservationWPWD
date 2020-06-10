@@ -25,10 +25,7 @@ class AgentFixtures extends Fixture
             $agent->setName($record['name']);
             $agent->setEmail($record['email']);
 
-            $this->addReference(
-                $record['email'],
-                $agent
-            );
+            $this->addReference($record['email'],$agent);
             
             $manager->persist($agent);
         }

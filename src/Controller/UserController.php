@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Role;
 use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,11 +33,20 @@ class UserController extends AbstractController
     public function new(Request $request): Response
     {
         $user = new User();
+
+
+        $defaultRole = $this->getDoctrine()
+            ->getRepository(Role::class)
+            ->findOneBy(['role' => 'member']);
+            
+
+
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user->addRole($defaultRole);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -54,6 +64,8 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);

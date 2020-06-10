@@ -17,7 +17,7 @@ class User1Type extends AbstractType
     {
         $builder
             ->add('login',TextType::class,[
-                'label' => 'Login:',
+                'label' => 'Nom d\'utilisateur:',
                 'attr' => [
                     'class' => 'form-control'
                 ]

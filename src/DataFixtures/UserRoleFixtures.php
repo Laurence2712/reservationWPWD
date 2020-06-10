@@ -2,9 +2,12 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\DataFixtures\RoleFixtures;
+use App\DataFixtures\UserFixtures;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\Datafixtures\DependentFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
 
 class UserRoleFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -14,17 +17,14 @@ class UserRoleFixtures extends Fixture implements DependentFixtureInterface
             [
                 'user_login' => 'bob',
                 'role' => 'admin',
-
             ],
             [
                 'user_login' => 'fred',
                 'role' => 'member',
-
             ],
             [
                 'user_login' => 'judith',
                 'role' => 'affiliate',
-
             ],
 
         ];
