@@ -75,7 +75,7 @@ class Reservation
         return $this;
     }
     public function __toString() {
-        return $this->getUser();
+        return $this->getUser()->getFirstname();
     }
 
 }

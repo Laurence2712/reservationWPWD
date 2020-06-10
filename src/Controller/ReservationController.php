@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/reservation")
@@ -43,6 +44,7 @@ class ReservationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $reservation->setUser($this->getUser());
             $entityManager->persist($reservation);
             $entityManager->flush();
 
@@ -68,12 +70,20 @@ class ReservationController extends AbstractController
     /**
      * @Route("/{id}/edit", name="reservation_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Reservation $reservation): Response
+    public function edit(Request $request, Reservation $reservation, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+         
+           // $reservation->setUser($this->getUser());
+            //$this->getDoctrine->getManager->persist($reservation);
+            //$manager->persist($reservation);
+           
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('reservation_index');

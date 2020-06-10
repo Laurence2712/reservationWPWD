@@ -64,7 +64,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ path('user_show',{'id':app.user.id})}}">Profil</a>
         </li>
-        {% if app.user.roles is same as ('admin') %}
+        {% if 'admin' in app.user.roles %}
         <li class="nav-item">
           <a class="nav-link" href="{{ path('easyadmin')}}">Administration</a>
         </li>      
