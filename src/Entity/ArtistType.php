@@ -102,4 +102,7 @@ class ArtistType
 
         return $this;
     }
+    public function __toString() {
+        return $this->getArtist()->getFirstname();
+    }
 }

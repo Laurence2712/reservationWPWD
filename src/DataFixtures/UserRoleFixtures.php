@@ -16,15 +16,15 @@ class UserRoleFixtures extends Fixture implements DependentFixtureInterface
         $userRoles = [
             [
                 'user_login' => 'bob',
-                'role' => 'admin',
+                'role' => 'ROLE_ADMIN',
             ],
             [
                 'user_login' => 'fred',
-                'role' => 'member',
+                'role' => 'ROLE_MEMBER',
             ],
             [
                 'user_login' => 'judith',
-                'role' => 'affiliate',
+                'role' => 'ROLE_AFFILIATE',
             ],
 
         ];

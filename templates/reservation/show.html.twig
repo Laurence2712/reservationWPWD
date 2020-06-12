@@ -10,7 +10,8 @@
     .title{  color:#fff; text-align:center; margin-top: 60px; background: #005c96; border: 1px solid #005c96; border-radius: 50px; padding: 20px;  }
      h1{ text-align:center; margin-bottom:100px; margin-top:70px;}
      .table{ max-width: 500px;}
-     .btn a {color:#fff; text-decoration: none;}
+     .btn a { text-decoration: none;}
+     .btnRes a{color:#fff; text-decoration:none;}
      .container{max-width:600px;}
 
 </style>
@@ -41,9 +42,9 @@
 
 <div class="container btnReservation">
 <hr>
-    <button class="btn btn-primary"><a href="{{ path('reservation_index') }}">Vos réservations</a></button>
-    <button class="btn btn-warning"><a href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a></button>
-    <button class="btn btn-success"><a href="{{ path('reservation_pay', {'id': reservation.id}) }}">Payer</a></button>
+    <button class="btnRes btn-primary"><a href="{{ path('reservation_index') }}">Vos réservations</a></button>
+    <button class="btnRes btn-warning"><a href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a></button>
+    <button class="btnRes btn-success"><a href="{{ path('reservation_pay', {'id': reservation.id}) }}">Payer</a></button>
     <span style="float:right">{{ include('reservation/_delete_form.html.twig') }}</span>
 </div>
 {% endblock %}

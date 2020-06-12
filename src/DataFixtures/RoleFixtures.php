@@ -11,9 +11,9 @@ class RoleFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $roles = [
-            ['role'=>'admin'],
-            ['role'=>'member'],
-            ['role'=>'affiliate'],
+            ['role'=>'ROLE_ADMIN'],
+            ['role'=>'ROLE_MEMBER'],
+            ['role'=>'ROLE_AFFILIATE'],
         ];
         
         foreach($roles as $data) {

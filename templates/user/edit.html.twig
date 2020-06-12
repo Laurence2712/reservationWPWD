@@ -8,15 +8,16 @@
 h1{text-align:center;}
 .btnDelete{margin:auto; display:block; border:1px solid red; background: red; color:#fff; max-width:150px;}
 .btnReturn{margin:auto; display:block; margin-bottom:20px;}
+.btnSave{text-align:center; display:block; margin:auto;}
 </style>
 
 <div class="container">
     <h1>Modifier votre profil</h1>
 
-   <p>{{ include('user/form.html.twig', {'button_label': 'Enregistrer'}) }}</p>
+    <p>{{ include('user/form.html.twig', {'button_label': 'Enregistrer'}) }}</p>
 
-    <button class="btn btn-primary btnReturn" href="{{ path('user_index') }}">Retour à la liste des utilisateurs</button>
+    <!--<button class="btn btn-primary btnReturn" href="{{ path('user_index') }}">Retour à la liste des utilisateurs</button>-->
 
-    <a class="btn btnDelete">{{ include('user/delete_form.html.twig') }}</a>
+    <!--<a class="btn btnDelete">{{ include('user/delete_form.html.twig') }}</a>-->
     </div>
 {% endblock %}

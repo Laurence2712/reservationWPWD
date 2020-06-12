@@ -1,5 +1,5 @@
 easy_admin: 
-
+  
     entities:
       - App\Entity\Show
       - App\Entity\Representation

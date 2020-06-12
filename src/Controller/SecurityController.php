@@ -2,21 +2,22 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Role;
+use App\Entity\User;
+use App\Form\UserType;
+use Symfony\Component\Form\Forms;
+use App\Repository\RoleRepository;
+use Symfony\Component\Form\FormView;
+use App\Security\LoginFormAuthenticator;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormFactoryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Form\FormFactoryBuilder;
-use Symfony\Component\Form\Forms;
-use Symfony\Component\Form\FormView;
-use App\Entity\User;
-use App\Entity\Role;
-use App\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-use App\Security\LoginFormAuthenticator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -51,7 +52,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/signin", name="app_signin")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, ValidatorInterface $validator): Response{
+    public function register(RoleRepository $repository, Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, ValidatorInterface $validator): Response{
 
 
       //Si l'utilisateur est connecté, on le redirige
@@ -64,9 +65,14 @@ class SecurityController extends AbstractController
         $title = 'Inscription';
         $user = new User();
         $errors = [];
+        
+
+        $role = $repository->findBy(['role'=> 'ROLE_MEMBER']);
+        //dd($role[0]);
         //$roleAdmin = new Role();
-        //$roleAdmin->setRole('admin');
-        //$user->addRole($roleAdmin);
+       // $roleAdmin->getRole('ROLE_MEMBER');
+        $user->addRole($role[0]);
+        
 
         $form = $this->createForm(UserType::class,$user);
         $form->remove('password');
@@ -75,10 +81,11 @@ class SecurityController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
           $user = $form->getData();
+         
           $user->setPassword($form->get('plainPassword')->getData());
 
-          $userRole = $form->get('user_role')->getData();
-          $user->addRole($userRole);
+          //$userRole = $form->get('user_role')->getData();
+          //$user->addRole($userRole);
 
           $errors = $validator->validate($user);
 
@@ -91,9 +98,9 @@ class SecurityController extends AbstractController
                   )
               );
 
-              $entityManager = $this->getDoctrine()->getManager();
+              $entityManager = $this->getDoctrine()->getManager(); 
               $entityManager->persist($user);
-              $entityManager->flush();
+              $entityManager->flush();//dd($user);
 
               // do anything else you need here, like send an email
 

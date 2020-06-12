@@ -56,26 +56,27 @@ class UserType extends AbstractType
                     'Anglais' => 'en',
                 ]
             ])
-            ->add('user_role', EntityType::class, [
+            /*->add('user_role', EntityType::class, [
                 'class' => Role::class,
                 'choice_label' => 'Role',
                 'label' => 'Role',
                 'mapped' => false,
-            ])
+            ])*/
             ->add('password',PasswordType::class)
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
                 'mapped' => false,
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J\'ai lu les conditions',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez acceptez nos conditions.',
                     ]),
                 ],
             ])

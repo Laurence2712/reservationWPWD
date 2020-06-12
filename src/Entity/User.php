@@ -57,6 +57,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
+     * 
      */
     private $roles;
 
@@ -168,8 +169,9 @@ class User implements UserInterface
 
     public function addRole(Role $role): self
     {
+        
         if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
+            $this->roles[] = $role; //dd($role);
         }
 
         return $this;

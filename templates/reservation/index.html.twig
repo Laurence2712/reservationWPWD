@@ -25,7 +25,7 @@
         <th class="titleTab">Représentations</th>
         <th class="titleTab">Adresse</th>
         <th class="titleTab">Date</th>
-        <th class="titleTab">Nombre de places réservées</th>
+        <th class="titleTab">Nombre de place(s)</th>
         <th class="titleTab">Action</th>
       </tr>
       </thead>
@@ -55,13 +55,9 @@
 
 
 
-            {% if reservation.places|length==1 %}
-            <td><span>1 place</span></td>
-              {% elseif reservation.places|length>1 %}
-            <td><span>{{ reservation.places|length }} places</span></td>
-              {% else %}
-            <em>aucune place</em>
-              {% endif %}</td>
+              <td>{{ reservation.places }}</td>
+
+       
       
       
               <td><button class="btn btn-info"><a class="btnvoir" href="{{ path('reservation_show', {'id': reservation.id}) }}">Voir</a></button><button class="btn btn-warning"><a class="btnvoir" href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a></button></td>
