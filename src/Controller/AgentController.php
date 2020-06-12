@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Agent;
 use App\Entity\Artist;
 use App\Form\ArtistTransfertType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AgentController extends AbstractController
 {
@@ -36,9 +37,9 @@ class AgentController extends AbstractController
         
         $user = $this->getUser();
         
-        if(!in_array('admin',$user->getRoles())) {
+        /*if(!in_array('admin',$user->getRoles())) {
             throw new \Exception('Access denied for user without "admin" role.');
-        }
+        }*/
         //----
         
         $repository = $this->getDoctrine()->getRepository(Artist::class);
@@ -59,6 +60,44 @@ class AgentController extends AbstractController
         return $this->render('agent/transfert.html.twig', [
             'artist' => $artist,
             'formTransfert' => $form->createView(),
+        ]);
+    }
+
+     /**
+     * @Route("/agent/new", name="agent_create")
+     */
+    /*public function create(Request $request, EntityManagerInterface $manager): response
+    {
+
+        $agent = new Agent();
+
+        $form = $this->creatForm(AgentType::class, $agent);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Persister 
+            $manager->persist($agent);
+            $manager->flush();
+            
+            return $this->redirectToRoute('agent_show,['id'=>$agent->getId()] ');
+         }
+         return $this->render('agent/create.html.twig', [
+            'agent' => $agent,
+            'formAgent' => $form->createView(),
+        ]);
+    }*/
+
+    /**
+     * @Route("/agent", name="agent")
+     */
+    public function show($id)
+    {
+        $repository = $this->getdoctrine()->getRepository(Agent::class);
+        $agent = $repository->find($id);
+        
+        return $this->render('agent/show.html.twig', [
+            'agent' => $agent,
         ]);
     }
 }
